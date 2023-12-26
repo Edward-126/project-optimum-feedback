@@ -56,31 +56,31 @@ export default function Feedback() {
   return (
     <>
       <div className="mx-8 flex h-screen flex-col items-center justify-center">
-        <motion.div
-          variants={stagger}
-          className="mb-4 w-full max-w-xl text-center"
-        >
-          <motion.h2
-            variants={lateralTransition}
-            whileInView={lateralTransition.float}
-            className="mb-1 font-bold max-md:text-4xl md:text-5xl"
-          >
-            Shape the Future
-          </motion.h2>
-          <motion.p
-            variants={lateralTransition}
-            whileInView={lateralTransition.float}
-            className=" text-gray-300"
-          >
-            Your feedback matters!
-          </motion.p>
-        </motion.div>
         {!isFormSubmitted ? (
           <form className="w-full max-w-xl" autoComplete="off">
+            <motion.div
+              variants={stagger}
+              className="mb-4 w-full max-w-xl text-center"
+            >
+              <motion.h2
+                variants={lateralTransition}
+                whileInView={lateralTransition.float}
+                className="mb-1 font-bold max-md:text-4xl md:text-5xl"
+              >
+                Shape the Future
+              </motion.h2>
+              <motion.p
+                variants={lateralTransition}
+                whileInView={lateralTransition.float}
+                className=" text-gray-300"
+              >
+                Your feedback matters!
+              </motion.p>
+            </motion.div>
             <div className="">
               <input
                 required
-                className="m-1 w-full  rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
+                className="m-1 mt-3 w-full  rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
                 type="text"
                 placeholder="Your Name"
                 name="name"
@@ -91,7 +91,7 @@ export default function Feedback() {
             <div className="">
               <input
                 required
-                className="m-1 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
+                className="m-1 mt-3 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
                 type="text"
                 placeholder="Your Job/Occupation"
                 name="position"
@@ -101,7 +101,7 @@ export default function Feedback() {
             </div>
             <div>
               <textarea
-                className="m-1 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
+                className="m-1 mt-3 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
                 placeholder="Your Feedback"
                 value={testimonial}
                 name="testimonial"
@@ -110,7 +110,10 @@ export default function Feedback() {
               />
             </div>
 
-            <div className="text-gray-400">
+            <div className="text-gray-400 ">
+              <label htmlFor="imgUrl" className="mx-2">
+                Upload your image
+              </label>
               <input
                 className="m-1 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4 "
                 type="file"
@@ -125,14 +128,21 @@ export default function Feedback() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="m-1 w-full rounded-lg bg-red-600 p-2 text-gray-50"
+              className="m-1 mt-5 w-full rounded-lg bg-red-600 p-2 text-gray-50"
             >
               {!loading ? "Send Feedback" : "Sending..."}
             </motion.button>
           </form>
         ) : (
-          <div>
-            <h3 className="head-text">Thank you for getting in touch!</h3>
+          <div className="text-center">
+            <motion.h3
+              variants={lateralTransition}
+              whileInView={lateralTransition.float}
+              className="mb-1 font-bold max-md:text-5xl md:text-6xl"
+            >
+              Thank you for your <span className=" text-red-600">feedback</span>
+              !
+            </motion.h3>
           </div>
         )}
       </div>
