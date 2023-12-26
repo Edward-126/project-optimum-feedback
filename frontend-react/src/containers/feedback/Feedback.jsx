@@ -13,6 +13,14 @@ export default function Feedback() {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleCloseErrorModal = () => {
+    setShowErrorModal(false);
+    setErrorMessage("");
+  };
+
   const { name, position, testimonial } = formData;
 
   const handleChangeInput = (e) => {
@@ -50,7 +58,14 @@ export default function Feedback() {
         setLoading(false);
         setIsFormSubmitted(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        setErrorMessage(
+          "An error occurred while submitting your feedback. Please try again.",
+        );
+        setShowErrorModal(true);
+      });
   };
 
   return (
@@ -146,6 +161,30 @@ export default function Feedback() {
           </div>
         )}
       </div>
+
+      {showErrorModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-70">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="mx-6 w-auto  max-w-lg rounded-md border border-zinc-50/15 bg-zinc-950 p-8 text-center"
+          >
+            <h4 className="mb-2 text-2xl font-semibold text-gray-100">Error</h4>
+            <p className="text-md mb-4 text-gray-200">{errorMessage}</p>
+
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              onClick={handleCloseErrorModal}
+              className=" mt-4 w-full  rounded-lg bg-red-600 p-2 px-4 text-gray-50 drop-shadow "
+            >
+              Close
+            </motion.button>
+          </motion.div>
+        </div>
+      )}
     </>
   );
 }
