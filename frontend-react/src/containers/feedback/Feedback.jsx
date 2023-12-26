@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { client } from "../../client";
 
 import React, { useState } from "react";
+import { lateralTransition, stagger } from "../../constants/transitions";
 
 export default function Feedback() {
   const [formData, setFormData] = useState({
@@ -53,64 +54,88 @@ export default function Feedback() {
   };
 
   return (
-    <div className="mx-8 flex h-screen items-center justify-center">
-      {!isFormSubmitted ? (
-        <div className="w-full max-w-xl">
-          <div className="">
-            <input
-              className="m-1 w-full rounded-lg border border-gray-400 p-2"
-              type="text"
-              placeholder="Your Name"
-              name="name"
-              value={name}
-              onChange={handleChangeInput}
-            />
-          </div>
-          <div className="">
-            <input
-              className="m-1 w-full rounded-lg border border-gray-400 p-2"
-              type="text"
-              placeholder="Your Job/Occupation"
-              name="position"
-              value={position}
-              onChange={handleChangeInput}
-            />
-          </div>
-          <div>
-            <textarea
-              className="m-1 w-full rounded-lg border border-gray-400 p-2"
-              placeholder="Your Feedback"
-              value={testimonial}
-              name="testimonial"
-              onChange={handleChangeInput}
-            />
-          </div>
-
-          <div>
-            <input
-              className="m-1 w-full rounded-lg border border-gray-400 p-2"
-              type="file"
-              name="imgUrl"
-              onChange={handleChangeInput}
-            />
-          </div>
-
-          <motion.button
-            type="button"
-            onClick={handleSubmit}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            className="m-1 w-full rounded-lg bg-red-600 p-2 text-gray-50"
+    <>
+      <div className="mx-8 flex h-screen flex-col items-center justify-center">
+        <motion.div
+          variants={stagger}
+          className="mb-4 w-full max-w-xl text-center"
+        >
+          <motion.h2
+            variants={lateralTransition}
+            whileInView={lateralTransition.float}
+            className="mb-1 font-bold max-md:text-4xl md:text-5xl"
           >
-            {!loading ? "Send Message" : "Sending..."}
-          </motion.button>
-        </div>
-      ) : (
-        <div>
-          <h3 className="head-text">Thank you for getting in touch!</h3>
-        </div>
-      )}
-    </div>
+            Shape the Future
+          </motion.h2>
+          <motion.p
+            variants={lateralTransition}
+            whileInView={lateralTransition.float}
+            className=" text-gray-300"
+          >
+            Your feedback matters!
+          </motion.p>
+        </motion.div>
+        {!isFormSubmitted ? (
+          <form className="w-full max-w-xl" autoComplete="off">
+            <div className="">
+              <input
+                required
+                className="m-1 w-full  rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
+                type="text"
+                placeholder="Your Name"
+                name="name"
+                value={name}
+                onChange={handleChangeInput}
+              />
+            </div>
+            <div className="">
+              <input
+                required
+                className="m-1 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
+                type="text"
+                placeholder="Your Job/Occupation"
+                name="position"
+                value={position}
+                onChange={handleChangeInput}
+              />
+            </div>
+            <div>
+              <textarea
+                className="m-1 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
+                placeholder="Your Feedback"
+                value={testimonial}
+                name="testimonial"
+                onChange={handleChangeInput}
+                required
+              />
+            </div>
+
+            <div className="text-gray-400">
+              <input
+                className="m-1 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4 "
+                type="file"
+                name="imgUrl"
+                onChange={handleChangeInput}
+              />
+            </div>
+
+            <motion.button
+              type="button"
+              onClick={handleSubmit}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              className="m-1 w-full rounded-lg bg-red-600 p-2 text-gray-50"
+            >
+              {!loading ? "Send Feedback" : "Sending..."}
+            </motion.button>
+          </form>
+        ) : (
+          <div>
+            <h3 className="head-text">Thank you for getting in touch!</h3>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
