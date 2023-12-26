@@ -1,6 +1,8 @@
 import Feedback from "./containers/feedback/Feedback";
 import "./App.css";
 
+import { inject } from "@vercel/analytics";
+
 function App() {
   return (
     <>
@@ -10,3 +12,5 @@ function App() {
 }
 
 export default App;
+
+inject();
