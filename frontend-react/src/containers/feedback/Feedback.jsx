@@ -3,6 +3,7 @@ import { client } from "../../client";
 
 import React, { useState } from "react";
 import { lateralTransition, stagger } from "../../constants/transitions";
+import Footer from "../footer/Footer";
 
 export default function Feedback() {
   const [formData, setFormData] = useState({
@@ -70,7 +71,7 @@ export default function Feedback() {
 
   return (
     <>
-      <div className="mx-8 flex h-screen flex-col items-center justify-center">
+      <div className="mx-8 flex h-dvh flex-col items-center justify-center">
         {!isFormSubmitted ? (
           <form className="w-full max-w-xl" autoComplete="off">
             <motion.div
@@ -92,7 +93,11 @@ export default function Feedback() {
                 Your feedback matters!
               </motion.p>
             </motion.div>
-            <div className="">
+            <motion.div
+              variants={lateralTransition}
+              whileInView={lateralTransition.floatUp}
+              className=""
+            >
               <input
                 required
                 className="m-1 mt-3 w-full  rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
@@ -102,8 +107,12 @@ export default function Feedback() {
                 value={name}
                 onChange={handleChangeInput}
               />
-            </div>
-            <div className="">
+            </motion.div>
+            <motion.div
+              variants={lateralTransition}
+              whileInView={lateralTransition.floatUp}
+              className=""
+            >
               <input
                 required
                 className="m-1 mt-3 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
@@ -113,8 +122,11 @@ export default function Feedback() {
                 value={position}
                 onChange={handleChangeInput}
               />
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              variants={lateralTransition}
+              whileInView={lateralTransition.floatUp}
+            >
               <textarea
                 className="m-1 mt-3 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4"
                 placeholder="Your Feedback"
@@ -123,9 +135,13 @@ export default function Feedback() {
                 onChange={handleChangeInput}
                 required
               />
-            </div>
+            </motion.div>
 
-            <div className="text-gray-400 ">
+            <motion.div
+              variants={lateralTransition}
+              whileInView={lateralTransition.floatUp}
+              className="text-gray-400 "
+            >
               <label htmlFor="imgUrl" className="mx-2">
                 Upload your image
               </label>
@@ -135,9 +151,11 @@ export default function Feedback() {
                 name="imgUrl"
                 onChange={handleChangeInput}
               />
-            </div>
+            </motion.div>
 
             <motion.button
+              variants={lateralTransition}
+              whileInView={lateralTransition.floatUp}
               type="button"
               onClick={handleSubmit}
               whileHover={{ scale: 1.02 }}
@@ -160,6 +178,13 @@ export default function Feedback() {
             </motion.h3>
           </div>
         )}
+        <motion.div
+          variants={lateralTransition}
+          whileInView={lateralTransition.floatUp}
+          className=""
+        >
+          <Footer />
+        </motion.div>
       </div>
 
       {showErrorModal && (
