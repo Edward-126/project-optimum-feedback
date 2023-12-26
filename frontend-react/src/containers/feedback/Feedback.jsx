@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { VscFeedback } from "react-icons/vsc";
 import { client } from "../../client";
 
 import React, { useState } from "react";
@@ -73,24 +74,35 @@ export default function Feedback() {
     <>
       <div className="mx-8 flex h-dvh flex-col items-center justify-center">
         {!isFormSubmitted ? (
-          <form className="w-full max-w-xl" autoComplete="off">
+          <motion.form
+            variants={stagger}
+            className="w-full max-w-xl"
+            autoComplete="off"
+          >
             <motion.div
               variants={stagger}
               className="mb-4 w-full max-w-xl text-center"
             >
+              <motion.div
+                variants={lateralTransition}
+                whileInView={lateralTransition.float}
+                className="max-md:text-4xl md:text-5xl"
+              >
+                <VscFeedback className=" inline-block " />
+              </motion.div>
               <motion.h2
                 variants={lateralTransition}
                 whileInView={lateralTransition.float}
                 className="mb-1 font-bold max-md:text-4xl md:text-5xl"
               >
-                Stronger Together
+                We Need Your Feedback!
               </motion.h2>
               <motion.p
                 variants={lateralTransition}
                 whileInView={lateralTransition.float}
                 className=" text-gray-300"
               >
-                Your feedback matters!
+                Share Your Thoughts, Shape Your Gym
               </motion.p>
             </motion.div>
             <motion.div
@@ -165,7 +177,7 @@ export default function Feedback() {
             >
               {!loading ? "Send Feedback" : "Sending..."}
             </motion.button>
-          </form>
+          </motion.form>
         ) : (
           <div className="text-center">
             <motion.h3
