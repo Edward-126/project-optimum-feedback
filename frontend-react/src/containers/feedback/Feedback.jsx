@@ -83,7 +83,7 @@ export default function Feedback() {
                 whileInView={lateralTransition.float}
                 className="mb-1 font-bold max-md:text-4xl md:text-5xl"
               >
-                Shape the Future
+                Stronger Together
               </motion.h2>
               <motion.p
                 variants={lateralTransition}
