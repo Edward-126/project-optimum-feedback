@@ -16,7 +16,11 @@ export default function Feedback() {
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === "imgUrl") {
+      setFormData({ ...formData, [name]: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = () => {
@@ -29,8 +33,18 @@ export default function Feedback() {
       testimonial: formData.testimonial,
     };
 
-    client
-      .create(contact)
+    client.assets
+      .upload("image", formData.imgUrl)
+      .then((imageAsset) => {
+        contact.imgUrl = {
+          _type: "image",
+          asset: {
+            _type: "reference",
+            _ref: imageAsset._id,
+          },
+        };
+        return client.create(contact);
+      })
       .then(() => {
         setLoading(false);
         setIsFormSubmitted(true);
@@ -68,6 +82,15 @@ export default function Feedback() {
               placeholder="Your Feedback"
               value={testimonial}
               name="testimonial"
+              onChange={handleChangeInput}
+            />
+          </div>
+
+          <div>
+            <input
+              className="m-1 w-full rounded-lg border border-gray-400 p-2"
+              type="file"
+              name="imgUrl"
               onChange={handleChangeInput}
             />
           </div>
