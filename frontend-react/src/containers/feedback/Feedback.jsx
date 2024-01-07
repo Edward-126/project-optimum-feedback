@@ -154,11 +154,11 @@ export default function Feedback() {
               whileInView={lateralTransition.floatUp}
               className="text-gray-400 "
             >
-              <label htmlFor="imgUrl" className="mx-2">
+              <label htmlFor="imgUrl" className="mx-2 capitalize">
                 Upload your image
               </label>
               <input
-                className="m-1 w-full rounded-lg border border-gray-400 bg-zinc-800/20 p-2 ring-red-600 focus:outline-none focus:ring-4 "
+                className="m-1 mt-3 w-full rounded-lg border border-gray-400 bg-zinc-800/20 file:mr-3 file:border-0 file:bg-red-600 file:px-4 file:py-2 file:text-white hover:file:bg-red-600/90"
                 type="file"
                 name="imgUrl"
                 onChange={handleChangeInput}
